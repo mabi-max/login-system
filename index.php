@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include('db.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +43,8 @@ background-color: blue;
     
     <div class="row m-5">
     <div class="text-center">
-        <p id="first" class="h1">Welcome to our website.</p> <span id="root"> We take imaginations and turn them into reality.</span>
+        <p id="first" class="h1">Welcome <?php echo $_SESSION['username'];?>
+        </p> <span id="root"> We take imaginations and turn them into reality.</span>
       </div>
 
 

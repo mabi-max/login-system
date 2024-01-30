@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm sticky-top bg-white border-bottom">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="#">Brand</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,6 +23,9 @@
                 <li><a class="dropdown-item" href="#">about</a></li>
                 <li><a class="dropdown-item" href="#">contact</a></li>
               </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-danger text-white" href="logout.php" >logout</a>
             </li>
           </ul>
         </div>

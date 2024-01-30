@@ -1,3 +1,37 @@
+<?php 
+session_start();
+include "db.php";
+if(isset($_POST['submit'])){ 
+    
+    $user_name = mysqli_real_escape_string($conn, $_POST['username']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    $query = "SELECT * FROM login WHERE username = '{$user_name}'";
+
+    $select_query = mysqli_query($conn, $query);
+    if(!$select_query){
+       die("Query failed". mysqli_error($conn)); 
+    }
+    while($row = mysqli_fetch_array($select_query)){
+         $db_id = $row['id'];
+         $db_user_name = $row['username'];
+         $db_password = $row['pass'];
+         $db_image = $row['img'];
+         $db_mail =$row['mail'];
+    }
+if(empty($user_name) || empty($password)){
+      $name_error = "Please insert your username and password";
+    }elseif($user_name !==$db_user_name || $password !== $db_password ){
+     $name_error = "Incorrect username and password";
+    }else  if($user_name ==$db_user_name && $password == $db_password ) {
+        $_SESSION['username'] = $db_user_name;
+        $_SESSION['img'] = $db_image;
+        header("Location: index.php");
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,15 +77,19 @@ background-color: blue;
 
       <!-- form section starts here -->
       <div class="container col-sm-3  mt-4 border rounded-3 p-3">
-        <form class="">
-            
-        <div class="form-group mb-3">
-          <label for="email">Email</label>
-          <input type="text" name="email" id="" class="form-control rounded-3" >
-        </div>
-          <!-- error message for email field
-          <p style='color:red'></p>"; -->
-    
+        <form class="" method="POST">
+        
+            <div class="form-group mb-3">
+                <label for="username">Username</label>
+                <input type="text" name="username" id="" class="form-control rounded-3" >
+            </div>
+              
+            <?php
+        if(isset($name_error)){
+            echo "<p style='color:red'>$name_error</p>";
+        }
+        ?>
+
       <div class="form-group mb-3">
         <label for="password">Password</label>
         <input type="text" name="password" id="" class="form-control rounded-3" >
